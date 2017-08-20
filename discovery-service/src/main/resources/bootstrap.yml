@@ -3,7 +3,7 @@ spring:
     name: discovery-service
   cloud:
     config:
-      uri: http://localhost:8081
+      uri: http://config-service:8081
       fail-fast: true
       password: config
       username: user

@@ -11,8 +11,10 @@ spring:
       username: user
 
 eureka:
+  instance:
+    hostname: ${spring.application.name}
   client:
     region: default
     registryFetchIntervalSeconds: 5
     serviceUrl:
-      defaultZone: http://localhost:8082/eureka/
+      defaultZone: http://discovery-service:8082/eureka/

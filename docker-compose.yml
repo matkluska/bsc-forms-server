@@ -1,0 +1,60 @@
+version: "2.1"
+services:
+  config-service:
+    image: mkluska/forms-config-service
+    restart: always
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  discovery-service:
+    image: mkluska/forms-discovery-service
+    restart: always
+    depends_on:
+      config-service:
+        condition: service_healthy
+    links:
+      - "config-service"
+    ports:
+      - 8082:8082
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  gateway:
+    image: mkluska/forms-gateway
+    restart: always
+    depends_on:
+      config-service:
+            condition: service_healthy
+      discovery-service:
+        condition: service_healthy
+    links:
+      - "config-service"
+      - "discovery-service"
+    ports:
+      - 80:8080
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  user-service:
+    image: mkluska/forms-user-service
+    restart: always
+    depends_on:
+      config-service:
+            condition: service_healthy
+      discovery-service:
+        condition: service_healthy
+    links:
+      - "config-service"
+      - "discovery-service"
+    ports:
+      - 8083:8083
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"

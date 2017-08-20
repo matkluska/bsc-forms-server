@@ -14,7 +14,7 @@ zuul:
 
     discovery-service:
         path: /discovery/**
-        url: http://localhost:8082
+        url: http://discovery-service:8082
         sensitiveHeaders: Set-Cookie,Authorization
 
 hystrix:
