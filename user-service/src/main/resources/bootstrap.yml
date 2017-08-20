@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: user-service
+  cloud:
+    config:
+      discovery:
+        service-id: config-service
+        enabled: true
+      fail-fast: true
+      password: config
+      username: user
+
+eureka:
+  client:
+    region: default
+    registryFetchIntervalSeconds: 5
+    serviceUrl:
+      defaultZone: http://localhost:8082/eureka/

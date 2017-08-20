@@ -1,0 +1,26 @@
+server:
+  port: 8080
+
+zuul:
+  ignoredServices: '*'
+  host:
+    connect-timeout-millis: 20000
+    socket-timeout-millis: 20000
+
+  routes:
+    user-service:
+        path: /user-service/**
+        sensitiveHeaders: Set-Cookie,Authorization
+
+    discovery-service:
+        path: /discovery/**
+        url: http://localhost:8082
+        sensitiveHeaders: Set-Cookie,Authorization
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 20000
