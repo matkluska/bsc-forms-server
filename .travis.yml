@@ -1,0 +1,44 @@
+sudo: required
+
+services:
+  - docker
+
+language: java
+jdk: oraclejdk8
+
+dist: trusty
+sudo: required
+
+env:
+  global:
+    - COMMIT=${TRAVIS_COMMIT::8}
+
+after_success:
+  - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+
+  #TAG
+  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
+
+  # CONFIG SERVICE
+  - export CONFIG_SERVICE=mkluska/forms-config-service
+  - docker build -t $CONFIG_SERVICE:$COMMIT ./config-service
+  - docker tag $CONFIG_SERVICE:$COMMIT $CONFIG_SERVICE:$TAG
+  - docker push $CONFIG_SERVICE
+
+  # SERVICE DISCOVERY
+  - export DISCOVERY_SERVICE=mkluska/forms-discovery-service
+  - docker build -t $DISCOVERY_SERVICE:$COMMIT ./discovery-service
+  - docker tag $DISCOVERY_SERVICE:$COMMIT $DISCOVERY_SERVICE:$TAG
+  - docker push $DISCOVERY_SERVICE
+
+  # GATEWAY
+  - export GATEWAY=mkluska/forms-gateway
+  - docker build -t $GATEWAY:$COMMIT ./gateway
+  - docker tag $GATEWAY:$COMMIT $GATEWAY:$TAG
+  - docker push $GATEWAY
+
+  # USER SERVICE
+  - export USER_SERVICE=mkluska/forms-user-service
+  - docker build -t $USER_SERVICE:$COMMIT ./user-service
+  - docker tag $USER_SERVICE:$COMMIT $USER_SERVICE:$TAG
+  - docker push $USER_SERVICE
