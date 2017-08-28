@@ -8,8 +8,8 @@ zuul:
     socket-timeout-millis: 20000
 
   routes:
-    user-service:
-        path: /user-service/**
+    auth-service:
+        path: /auth-service/**
         sensitiveHeaders: Set-Cookie,Authorization
 
     discovery-service:

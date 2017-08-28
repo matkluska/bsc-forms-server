@@ -11,5 +11,10 @@ services:
   gateway:
     build: gateway
 
-  user-service:
-    build: user-service
+  auth-service:
+    build: auth-service
+
+  auth-mongodb:
+    build: mongodb
+    ports:
+      - 25000:27017

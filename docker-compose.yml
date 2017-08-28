@@ -41,12 +41,12 @@ services:
         max-size: "10m"
         max-file: "10"
 
-  user-service:
-    image: mkluska/forms-user-service
+  auth-service:
+    image: mkluska/forms-auth-service
     restart: always
     depends_on:
       config-service:
-            condition: service_healthy
+        condition: service_healthy
       discovery-service:
         condition: service_healthy
     links:
@@ -54,6 +54,16 @@ services:
       - "discovery-service"
     ports:
       - 8083:8083
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  auth-mongodb:
+    image: mkluska/forms-mongo
+    restart: always
+    ports:
+      - 25000:27017
     logging:
       options:
         max-size: "10m"

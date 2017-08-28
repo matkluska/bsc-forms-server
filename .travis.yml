@@ -37,8 +37,14 @@ after_success:
   - docker tag $GATEWAY:$COMMIT $GATEWAY:$TAG
   - docker push $GATEWAY
 
-  # USER SERVICE
-  - export USER_SERVICE=mkluska/forms-user-service
-  - docker build -t $USER_SERVICE:$COMMIT ./user-service
-  - docker tag $USER_SERVICE:$COMMIT $USER_SERVICE:$TAG
-  - docker push $USER_SERVICE
+  # AUTH SERVICE
+  - export AUTH_SERVICE=mkluska/forms-auth-service
+  - docker build -t $AUTH_SERVICE:$COMMIT ./auth-service
+  - docker tag $AUTH_SERVICE:$COMMIT $AUTH_SERVICE:$TAG
+  - docker push $AUTH_SERVICE
+
+  # MONGO DB
+   - export MONGO_DB=mkluska/forms-mongo
+   - docker build -t $MONGO_DB:$COMMIT ./mongodb
+   - docker tag $MONGO_DB:$COMMIT $MONGO_DB:$TAG
+   - docker push $MONGO_DB

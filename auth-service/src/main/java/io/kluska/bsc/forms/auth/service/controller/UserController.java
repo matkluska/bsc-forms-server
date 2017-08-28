@@ -1,4 +1,4 @@
-package io.kluska.bsc.forms.user.service.controller;
+package io.kluska.bsc.forms.auth.service.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
