@@ -44,7 +44,7 @@ after_success:
   - docker push $AUTH_SERVICE
 
   # MONGO DB
-   - export MONGO_DB=mkluska/forms-mongo
-   - docker build -t $MONGO_DB:$COMMIT ./mongodb
-   - docker tag $MONGO_DB:$COMMIT $MONGO_DB:$TAG
-   - docker push $MONGO_DB
+  - export MONGO_DB=mkluska/forms-mongo
+  - docker build -t $MONGO_DB:$COMMIT ./mongodb
+  - docker tag $MONGO_DB:$COMMIT $MONGO_DB:$TAG
+  - docker push $MONGO_DB
