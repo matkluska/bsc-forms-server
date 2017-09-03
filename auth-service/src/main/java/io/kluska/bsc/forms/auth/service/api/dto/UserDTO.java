@@ -18,6 +18,6 @@ public class UserDTO {
     @Size(min = 6, max = 15, message = "Password length must be between 6 and 15 characters")
     private String password;
     @NotNull(message = "Email is required")
-    @Email(message = "Incorrect email")
+    @Email(message = "Invalid email")
     private String email;
 }
