@@ -10,12 +10,12 @@ zuul:
   routes:
     auth-service:
         path: /auth-service/**
-        sensitiveHeaders: Set-Cookie,Authorization
+        sensitiveHeaders:
 
     discovery-service:
         path: /discovery/**
         url: http://discovery-service:8082
-        sensitiveHeaders: Set-Cookie,Authorization
+        sensitiveHeaders:
 
 hystrix:
   command:

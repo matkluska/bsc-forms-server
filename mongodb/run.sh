@@ -18,7 +18,7 @@ fi
 $cmd &
 
 if [ ! -f /data/db/.mongodb_password_set ]; then
-    chmod +x "set_mongodb_password.sh"
+#    chmod +x "set_mongodb_password.sh"
     /set_mongodb_password.sh
 fi
 

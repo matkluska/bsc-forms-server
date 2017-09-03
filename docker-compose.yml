@@ -44,6 +44,10 @@ services:
   auth-service:
     image: mkluska/forms-auth-service
     restart: always
+    environment:
+      MONGODB_APPLICATION_USER: mongo
+      MONGODB_APPLICATION_PASS: pass
+      MONGODB_APPLICATION_DATABASE: bsc-forms
     depends_on:
       config-service:
         condition: service_healthy
@@ -52,6 +56,7 @@ services:
     links:
       - "config-service"
       - "discovery-service"
+      - "auth-mongodb"
     ports:
       - 8083:8083
     logging:
@@ -62,8 +67,10 @@ services:
   auth-mongodb:
     image: mkluska/forms-mongo
     restart: always
-    ports:
-      - 25000:27017
+    environment:
+      MONGODB_APPLICATION_USER: mongo
+      MONGODB_APPLICATION_PASS: pass
+      MONGODB_APPLICATION_DATABASE: bsc-forms
     logging:
       options:
         max-size: "10m"
