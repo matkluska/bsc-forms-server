@@ -7,5 +7,5 @@ spring:
       database: ${MONGODB_APPLICATION_DATABASE}
       port: 27017
 server:
-  port: 8083
+  port: 8080
   contextPath: /uaa

@@ -3,7 +3,7 @@ services:
   config-service:
     build: config-service
     ports:
-      - 8081:8081
+      - 8081:8080
 
   discovery-service:
     build: discovery-service

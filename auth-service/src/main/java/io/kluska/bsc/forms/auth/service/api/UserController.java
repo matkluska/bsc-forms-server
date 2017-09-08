@@ -4,13 +4,13 @@ import io.kluska.bsc.forms.auth.service.api.dto.UserDTO;
 import io.kluska.bsc.forms.auth.service.domain.User;
 import io.kluska.bsc.forms.auth.service.domain.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.security.Principal;
 
 /**
  * @author Mateusz Kluska
@@ -26,8 +26,13 @@ public class UserController {
     }
 
     @RequestMapping(path = "/current", method = RequestMethod.GET)
-    public Principal getUser(Principal principal) {
-        return principal;
+    public UserDTO getUser(@AuthenticationPrincipal User user) {
+        if (user == null)
+            return null;
+        return UserDTO.builder()
+                .username(user.getUsername())
+                .email(user.getEmail())
+                .build();
     }
 
     @RequestMapping(method = RequestMethod.POST)

@@ -1,7 +1,5 @@
 FROM mongo:3.4.7
 
-MAINTAINER Mateusz Kluska
-
 ENV AUTH yes
 ENV STORAGE_ENGINE wiredTiger
 ENV JOURNALING yes

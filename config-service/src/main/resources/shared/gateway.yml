@@ -14,7 +14,7 @@ zuul:
 
     discovery-service:
         path: /discovery/**
-        url: http://discovery-service:8082
+        url: http://discovery-service:8080
         sensitiveHeaders:
 
 hystrix:
