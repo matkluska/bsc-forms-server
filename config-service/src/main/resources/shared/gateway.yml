@@ -12,6 +12,10 @@ zuul:
         path: /auth-service/**
         sensitiveHeaders:
 
+    form-service:
+        path: /form-service/**
+        sensitiveHeaders:
+
     discovery-service:
         path: /discovery/**
         url: http://discovery-service:8080

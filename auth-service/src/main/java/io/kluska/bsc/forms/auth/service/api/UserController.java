@@ -1,16 +1,19 @@
 package io.kluska.bsc.forms.auth.service.api;
 
 import io.kluska.bsc.forms.auth.service.api.dto.UserDTO;
+import io.kluska.bsc.forms.auth.service.api.exception.ClientErrorException;
+import io.kluska.bsc.forms.auth.service.api.exception.ErrorInfo;
 import io.kluska.bsc.forms.auth.service.domain.User;
 import io.kluska.bsc.forms.auth.service.domain.UserService;
+import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 /**
  * @author Mateusz Kluska
@@ -26,13 +29,14 @@ public class UserController {
     }
 
     @RequestMapping(path = "/current", method = RequestMethod.GET)
-    public UserDTO getUser(@AuthenticationPrincipal User user) {
-        if (user == null)
-            return null;
-        return UserDTO.builder()
-                .username(user.getUsername())
-                .email(user.getEmail())
-                .build();
+    public UserDTO getUser(@NonNull Principal principal) {
+        return userService.findByUsername(principal.getName())
+                .map(UserController::toUserDTO)
+                .orElseThrow(() -> new ClientErrorException(ErrorInfo.USER_NOT_FOUND));
+//        return UserDTO.builder()
+//                .username(user.getUsername())
+//                .email(user.getEmail())
+//                .build();
     }
 
     @RequestMapping(method = RequestMethod.POST)
@@ -42,5 +46,12 @@ public class UserController {
         user.setUsername(userDTO.getUsername());
         user.setEmail(userDTO.getEmail());
         userService.create(user);
+    }
+
+    private static UserDTO toUserDTO(User user) {
+        return UserDTO.builder()
+                .username(user.getUsername())
+                .email(user.getEmail())
+                .build();
     }
 }

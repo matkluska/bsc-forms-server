@@ -28,6 +28,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Optional<User> findByUsername(String username) {
+        return repository.findOneByUsername(username);
+    }
+
+    @Override
     public void create(User user) {
 
         Optional<User> existing = repository.findOneByUsername(user.getUsername());

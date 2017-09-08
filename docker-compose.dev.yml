@@ -18,3 +18,11 @@ services:
     build: mongodb
     ports:
       - 25000:27017
+
+  form-service:
+    build: form-service
+
+  form-mongodb:
+    build: mongodb
+    ports:
+      - 25001:27017

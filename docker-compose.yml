@@ -66,3 +66,34 @@ services:
       options:
         max-size: "10m"
         max-file: "10"
+
+  form-service:
+    image: mkluska/forms-form-service
+    restart: always
+    environment:
+      MONGODB_APPLICATION_USER: mongo
+      MONGODB_APPLICATION_PASS: pass
+      MONGODB_APPLICATION_DATABASE: bsc-forms
+    depends_on:
+      config-service:
+        condition: service_healthy
+      discovery-service:
+        condition: service_healthy
+    ports:
+      - 8084:8080
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  form-mongodb:
+    image: mkluska/forms-mongo
+    restart: always
+    environment:
+      MONGODB_APPLICATION_USER: mongo
+      MONGODB_APPLICATION_PASS: pass
+      MONGODB_APPLICATION_DATABASE: bsc-forms
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"

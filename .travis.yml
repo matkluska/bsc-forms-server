@@ -43,6 +43,12 @@ after_success:
   - docker tag $AUTH_SERVICE:$COMMIT $AUTH_SERVICE:$TAG
   - docker push $AUTH_SERVICE
 
+  # FORM SERVICE
+  - export FORM_SERVICE=mkluska/forms-form-service
+  - docker build -t $FORM_SERVICE:$COMMIT ./form-service
+  - docker tag $FORM_SERVICE:$COMMIT $FORM_SERVICE:$TAG
+  - docker push $FORM_SERVICE
+
   # MONGO DB
   - export MONGO_DB=mkluska/forms-mongo
   - docker build -t $MONGO_DB:$COMMIT ./mongodb
