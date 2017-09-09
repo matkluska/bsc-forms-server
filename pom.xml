@@ -16,6 +16,7 @@
         <module>gateway</module>
         <module>auth-service</module>
         <module>form-service</module>
+        <module>reply-stats-service</module>
     </modules>
 
     <properties>

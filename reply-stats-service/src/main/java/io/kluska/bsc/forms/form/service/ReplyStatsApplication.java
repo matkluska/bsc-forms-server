@@ -17,8 +17,8 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 @EnableDiscoveryClient
 @EnableOAuth2Client
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class FormApplication extends ResourceServerConfigurerAdapter {
+public class ReplyStatsApplication extends ResourceServerConfigurerAdapter {
     public static void main(String[] args) {
-        SpringApplication.run(FormApplication.class, args);
+        SpringApplication.run(ReplyStatsApplication.class, args);
     }
 }

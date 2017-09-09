@@ -26,7 +26,7 @@ services:
     restart: always
     depends_on:
       config-service:
-            condition: service_healthy
+        condition: service_healthy
       discovery-service:
         condition: service_healthy
     ports:
@@ -39,17 +39,11 @@ services:
   auth-service:
     image: mkluska/forms-auth-service
     restart: always
-    environment:
-      MONGODB_APPLICATION_USER: mongo
-      MONGODB_APPLICATION_PASS: pass
-      MONGODB_APPLICATION_DATABASE: bsc-forms
     depends_on:
       config-service:
         condition: service_healthy
       discovery-service:
         condition: service_healthy
-    ports:
-      - 8083:8080
     logging:
       options:
         max-size: "10m"
@@ -58,10 +52,6 @@ services:
   auth-mongodb:
     image: mkluska/forms-mongo
     restart: always
-    environment:
-      MONGODB_APPLICATION_USER: mongo
-      MONGODB_APPLICATION_PASS: pass
-      MONGODB_APPLICATION_DATABASE: bsc-forms
     logging:
       options:
         max-size: "10m"
@@ -70,17 +60,11 @@ services:
   form-service:
     image: mkluska/forms-form-service
     restart: always
-    environment:
-      MONGODB_APPLICATION_USER: mongo
-      MONGODB_APPLICATION_PASS: pass
-      MONGODB_APPLICATION_DATABASE: bsc-forms
     depends_on:
       config-service:
         condition: service_healthy
       discovery-service:
         condition: service_healthy
-    ports:
-      - 8084:8080
     logging:
       options:
         max-size: "10m"
@@ -89,10 +73,27 @@ services:
   form-mongodb:
     image: mkluska/forms-mongo
     restart: always
-    environment:
-      MONGODB_APPLICATION_USER: mongo
-      MONGODB_APPLICATION_PASS: pass
-      MONGODB_APPLICATION_DATABASE: bsc-forms
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  reply-stats-service:
+    image: mkluska/forms-reply-stats-service
+    restart: always
+    depends_on:
+      config-service:
+        condition: service_healthy
+      discovery-service:
+        condition: service_healthy
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  reply-mongodb:
+    image: mkluska/forms-mongo
+    restart: always
     logging:
       options:
         max-size: "10m"

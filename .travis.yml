@@ -49,6 +49,12 @@ after_success:
   - docker tag $FORM_SERVICE:$COMMIT $FORM_SERVICE:$TAG
   - docker push $FORM_SERVICE
 
+  # REPLAY & STATS SERVICE
+  - export REPLY_STATS_SERVICE=mkluska/forms-reply-stats-service
+  - docker build -t $REPLY_STATS_SERVICE:$COMMIT ./reply-stats-service
+  - docker tag $REPLY_STATS_SERVICE:$COMMIT $REPLY_STATS_SERVICE:$TAG
+  - docker push $REPLY_STATS_SERVICE
+
   # MONGO DB
   - export MONGO_DB=mkluska/forms-mongo
   - docker build -t $MONGO_DB:$COMMIT ./mongodb

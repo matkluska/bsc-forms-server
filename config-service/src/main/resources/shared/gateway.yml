@@ -9,17 +9,21 @@ zuul:
 
   routes:
     auth-service:
-        path: /auth-service/**
-        sensitiveHeaders:
+      path: /auth-service/**
+      sensitiveHeaders:
 
     form-service:
-        path: /form-service/**
-        sensitiveHeaders:
+      path: /form-service/**
+      sensitiveHeaders:
+
+    reply-stats-service:
+      path: /reply-stats-service/**
+      sensitiveHeaders:
 
     discovery-service:
-        path: /discovery/**
-        url: http://discovery-service:8080
-        sensitiveHeaders:
+      path: /discovery/**
+      url: http://discovery-service:8080
+      sensitiveHeaders:
 
 hystrix:
   command:

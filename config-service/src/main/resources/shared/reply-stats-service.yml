@@ -1,0 +1,11 @@
+spring:
+  data:
+    mongodb:
+      host: reply-mongodb
+      username: ${MONGODB_APPLICATION_USER}
+      password: ${MONGODB_APPLICATION_PASS}
+      database: ${MONGODB_APPLICATION_DATABASE}
+      port: 27017
+
+server:
+  port: 8080

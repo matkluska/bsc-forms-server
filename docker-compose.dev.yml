@@ -13,16 +13,54 @@ services:
 
   auth-service:
     build: auth-service
+    environment:
+      MONGODB_APPLICATION_USER: mongo
+      MONGODB_APPLICATION_PASS: pass
+      MONGODB_APPLICATION_DATABASE: bsc-forms
+    ports:
+      - 8083:8080
 
   auth-mongodb:
     build: mongodb
+    environment:
+      MONGODB_APPLICATION_USER: mongo
+      MONGODB_APPLICATION_PASS: pass
+      MONGODB_APPLICATION_DATABASE: bsc-forms
     ports:
       - 25000:27017
 
   form-service:
     build: form-service
+    environment:
+      MONGODB_APPLICATION_USER: mongo
+      MONGODB_APPLICATION_PASS: pass
+      MONGODB_APPLICATION_DATABASE: bsc-forms
+    ports:
+      - 8084:8080
 
   form-mongodb:
     build: mongodb
+    environment:
+      MONGODB_APPLICATION_USER: mongo
+      MONGODB_APPLICATION_PASS: pass
+      MONGODB_APPLICATION_DATABASE: bsc-forms
     ports:
       - 25001:27017
+
+  reply-stats-service:
+    build: reply-stats-service
+    environment:
+      MONGODB_APPLICATION_USER: mongo
+      MONGODB_APPLICATION_PASS: pass
+      MONGODB_APPLICATION_DATABASE: bsc-forms
+    ports:
+      - 8085:8080
+
+  reply-mongodb:
+    build: mongodb
+    environment:
+      MONGODB_APPLICATION_USER: mongo
+      MONGODB_APPLICATION_PASS: pass
+      MONGODB_APPLICATION_DATABASE: bsc-forms
+    ports:
+      - 25002:27017
