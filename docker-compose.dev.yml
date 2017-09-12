@@ -37,6 +37,7 @@ services:
       MONGODB_APPLICATION_DATABASE: bsc-forms
     ports:
       - 8084:8080
+      - 8787:8787
 
   form-mongodb:
     build: mongodb

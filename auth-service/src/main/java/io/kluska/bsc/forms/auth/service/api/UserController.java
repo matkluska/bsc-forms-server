@@ -1,15 +1,16 @@
 package io.kluska.bsc.forms.auth.service.api;
 
 import io.kluska.bsc.forms.auth.service.api.dto.UserDTO;
-import io.kluska.bsc.forms.auth.service.api.exception.ClientErrorException;
-import io.kluska.bsc.forms.auth.service.api.exception.ErrorInfo;
 import io.kluska.bsc.forms.auth.service.domain.User;
 import io.kluska.bsc.forms.auth.service.domain.UserService;
+import io.kluska.bsc.forms.exception.handling.error.ClientErrorException;
+import io.kluska.bsc.forms.exception.handling.error.ErrorInfo;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
@@ -28,18 +29,14 @@ public class UserController {
         this.userService = userService;
     }
 
-    @RequestMapping(path = "/current", method = RequestMethod.GET)
+    @GetMapping(path = "/current")
     public UserDTO getUser(@NonNull Principal principal) {
         return userService.findByUsername(principal.getName())
                 .map(UserController::toUserDTO)
                 .orElseThrow(() -> new ClientErrorException(ErrorInfo.USER_NOT_FOUND));
-//        return UserDTO.builder()
-//                .username(user.getUsername())
-//                .email(user.getEmail())
-//                .build();
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @PostMapping
     public void createUser(@Valid @RequestBody UserDTO userDTO) {
         User user = new User();
         user.setPassword(userDTO.getPassword());

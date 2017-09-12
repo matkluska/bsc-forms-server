@@ -17,6 +17,7 @@
         <module>auth-service</module>
         <module>form-service</module>
         <module>reply-stats-service</module>
+        <module>exception-handling</module>
     </modules>
 
     <properties>
@@ -27,6 +28,8 @@
         <lombok.version>1.16.18</lombok.version>
         <validation-api.version>2.0.0.Final</validation-api.version>
         <hibernate-validator.version>6.0.2.Final</hibernate-validator.version>
+        <modelmapper.version>1.1.0</modelmapper.version>
+        <vavr.version>0.9.0</vavr.version>
     </properties>
 
     <parent>
@@ -53,6 +56,14 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
+
+            <dependency>
+                <groupId>io.kluska.bsc</groupId>
+                <artifactId>exception-handling</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
@@ -60,29 +71,41 @@
                 <scope>provided</scope>
             </dependency>
             <dependency>
+                <groupId>io.vavr</groupId>
+                <artifactId>vavr</artifactId>
+                <version>${vavr.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>javax.validation</groupId>
                 <artifactId>validation-api</artifactId>
                 <version>${validation-api.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.hibernate</groupId>
+                <groupId>org.hibernate.validator</groupId>
                 <artifactId>hibernate-validator</artifactId>
                 <version>${hibernate-validator.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.modelmapper</groupId>
+                <artifactId>modelmapper</artifactId>
+                <version>${modelmapper.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
 
     <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${spring-boot-maven-plugin.version}</version>
-                <configuration>
-                    <finalName>${project.artifactId}</finalName>
-                    <addResources>true</addResources>
-                </configuration>
-            </plugin>
-        </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring-boot-maven-plugin.version}</version>
+                    <configuration>
+                        <finalName>${project.artifactId}</finalName>
+                        <addResources>true</addResources>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
 </project>

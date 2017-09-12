@@ -1,10 +1,8 @@
 package io.kluska.bsc.forms.auth.service.domain;
 
-import io.kluska.bsc.forms.auth.service.api.exception.ClientErrorException;
-import io.kluska.bsc.forms.auth.service.api.exception.ErrorInfo;
+import io.kluska.bsc.forms.exception.handling.error.ClientErrorException;
+import io.kluska.bsc.forms.exception.handling.error.ErrorInfo;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;

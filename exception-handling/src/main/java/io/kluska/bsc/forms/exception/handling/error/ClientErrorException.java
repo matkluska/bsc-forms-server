@@ -1,4 +1,4 @@
-package io.kluska.bsc.forms.auth.service.api.exception;
+package io.kluska.bsc.forms.exception.handling.error;
 
 /**
  * @author Mateusz Kluska

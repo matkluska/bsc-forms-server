@@ -18,3 +18,5 @@ eureka:
     registryFetchIntervalSeconds: 5
     serviceUrl:
       defaultZone: http://discovery-service:8080/eureka/
+logging:
+  level: trace

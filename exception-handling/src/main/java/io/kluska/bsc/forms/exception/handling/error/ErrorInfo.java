@@ -1,4 +1,4 @@
-package io.kluska.bsc.forms.auth.service.api.exception;
+package io.kluska.bsc.forms.exception.handling.error;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -15,7 +15,8 @@ public enum ErrorInfo {
     MAIL_ALREADY_IN_USE(4002, "Mail already in use", HttpStatus.CONFLICT),
     MAIL_INVALID(4003, "Invalid mail", HttpStatus.BAD_REQUEST),
     USERNAME_ALREADY_IN_USE(4004, "Username already in use", HttpStatus.CONFLICT),
-    USER_NOT_FOUND(4005, "User not found", HttpStatus.NOT_FOUND);
+    USER_NOT_FOUND(4005, "User not found", HttpStatus.NOT_FOUND),
+    FORM_NOT_FOUND(4006, "Form not found", HttpStatus.NOT_FOUND);
 
     private final int errCode;
     private final String errDesc;
