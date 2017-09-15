@@ -2,7 +2,7 @@ package io.kluska.bsc.forms.form.service.api.controller;
 
 import io.kluska.bsc.forms.exception.handling.error.ClientErrorException;
 import io.kluska.bsc.forms.exception.handling.error.ErrorInfo;
-import io.kluska.bsc.forms.form.service.api.dto.FormDTO;
+import io.kluska.bsc.forms.form.api.dto.FormDTO;
 import io.kluska.bsc.forms.form.service.domain.converter.FormConverter;
 import io.kluska.bsc.forms.form.service.domain.converter.FormDTOConverter;
 import io.kluska.bsc.forms.form.service.domain.model.Form;

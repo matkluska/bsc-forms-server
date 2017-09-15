@@ -1,11 +1,10 @@
 package io.kluska.bsc.forms.auth.service.infrastructure;
 
 import io.kluska.bsc.forms.auth.service.domain.MongoUserDetailsService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -21,32 +20,18 @@ import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFacto
  * @author Mateusz Kluska
  */
 @Configuration
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
 
     private final AuthenticationManager authenticationManager;
 
     private final MongoUserDetailsService userDetailsService;
 
-    private final Environment env;
-
-    @Autowired
-    public OAuth2AuthorizationConfig(@Qualifier("authenticationManagerBean") AuthenticationManager authenticationManager,
-                                     MongoUserDetailsService userDetailsService, Environment env) {
-        this.authenticationManager = authenticationManager;
-        this.userDetailsService = userDetailsService;
-        this.env = env;
-    }
-
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
                 .withClient("browser")
                 .authorizedGrantTypes("refresh_token", "password")
-                .scopes("ui")
-                .and()
-                .withClient("postman")
-                .secret(env.getProperty("DEV_PASS"))
-                .authorizedGrantTypes("client_credentials")
                 .scopes("ui");
     }
 

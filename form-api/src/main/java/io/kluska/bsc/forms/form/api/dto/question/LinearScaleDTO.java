@@ -1,7 +1,7 @@
-package io.kluska.bsc.forms.form.service.api.dto.question;
+package io.kluska.bsc.forms.form.api.dto.question;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import io.kluska.bsc.forms.form.service.api.dto.QuestionDTO;
+import io.kluska.bsc.forms.form.api.dto.QuestionDTO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

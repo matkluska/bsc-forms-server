@@ -1,7 +1,7 @@
-package io.kluska.bsc.forms.form.service.api.dto.question;
+package io.kluska.bsc.forms.form.api.dto.question;
 
-import io.kluska.bsc.forms.form.service.api.dto.OptionDTO;
-import io.kluska.bsc.forms.form.service.api.dto.QuestionDTO;
+import io.kluska.bsc.forms.form.api.dto.OptionDTO;
+import io.kluska.bsc.forms.form.api.dto.QuestionDTO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -17,7 +17,7 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
-public class SingleChoiceDTO extends QuestionDTO {
+public class MultipleChoiceDTO extends QuestionDTO {
     @NonNull
     @NotNull
     @Valid

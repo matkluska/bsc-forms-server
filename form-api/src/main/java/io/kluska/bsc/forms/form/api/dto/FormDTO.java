@@ -1,5 +1,6 @@
-package io.kluska.bsc.forms.form.service.api.dto;
+package io.kluska.bsc.forms.form.api.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 import lombok.NonNull;
@@ -14,6 +15,7 @@ import java.util.List;
  */
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class FormDTO {
     private String id;
     @NonNull

@@ -1,14 +1,15 @@
-package io.kluska.bsc.forms.form.service.api.dto;
+package io.kluska.bsc.forms.form.api.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import io.kluska.bsc.forms.form.service.api.dto.question.LinearScaleDTO;
-import io.kluska.bsc.forms.form.service.api.dto.question.LongTextDTO;
-import io.kluska.bsc.forms.form.service.api.dto.question.MultipleChoiceDTO;
-import io.kluska.bsc.forms.form.service.api.dto.question.ShortTextDTO;
-import io.kluska.bsc.forms.form.service.api.dto.question.SingleChoiceDTO;
+import io.kluska.bsc.forms.form.api.dto.question.LinearScaleDTO;
+import io.kluska.bsc.forms.form.api.dto.question.LongTextDTO;
+import io.kluska.bsc.forms.form.api.dto.question.MultipleChoiceDTO;
+import io.kluska.bsc.forms.form.api.dto.question.ShortTextDTO;
+import io.kluska.bsc.forms.form.api.dto.question.SingleChoiceDTO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -33,6 +34,7 @@ import javax.validation.constraints.NotNull;
         @Type(value = LinearScaleDTO.class, name = "LINEAR_SCALE")
 })
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public abstract class QuestionDTO {
     private String id;
     @NonNull

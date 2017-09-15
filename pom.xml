@@ -18,6 +18,7 @@
         <module>form-service</module>
         <module>reply-stats-service</module>
         <module>exception-handling</module>
+        <module>form-api</module>
     </modules>
 
     <properties>
@@ -61,6 +62,11 @@
             <dependency>
                 <groupId>io.kluska.bsc</groupId>
                 <artifactId>exception-handling</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.kluska.bsc</groupId>
+                <artifactId>form-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

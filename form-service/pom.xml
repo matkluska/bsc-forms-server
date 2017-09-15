@@ -39,6 +39,10 @@
 
         <dependency>
             <groupId>io.kluska.bsc</groupId>
+            <artifactId>form-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.kluska.bsc</groupId>
             <artifactId>exception-handling</artifactId>
         </dependency>
 

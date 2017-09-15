@@ -1,6 +1,6 @@
 package io.kluska.bsc.forms.form.service.domain.converter;
 
-import io.kluska.bsc.forms.form.service.api.dto.FormDTO;
+import io.kluska.bsc.forms.form.api.dto.FormDTO;
 import io.kluska.bsc.forms.form.service.domain.model.Form;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
