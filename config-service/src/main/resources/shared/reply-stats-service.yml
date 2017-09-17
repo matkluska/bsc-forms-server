@@ -7,5 +7,16 @@ spring:
       database: ${MONGODB_APPLICATION_DATABASE}
       port: 27017
 
+security:
+  oauth2:
+    client:
+      clientId: reply-stats-service
+      clientSecret: ${REPLY_STATS_SERVICE_PASS}
+      accessTokenUri: http://gateway:8080/auth-service/uaa/oauth/token
+      grant-type: client_credentials
+      scope: server
+    resource:
+      tokenInfoUri: http://gateway:8080/auth-service/uaa/oauth/check_token
+
 server:
   port: 8080

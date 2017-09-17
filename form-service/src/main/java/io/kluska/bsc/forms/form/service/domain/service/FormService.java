@@ -2,6 +2,7 @@ package io.kluska.bsc.forms.form.service.domain.service;
 
 import io.kluska.bsc.forms.form.service.domain.model.Form;
 import io.kluska.bsc.forms.form.service.domain.repository.FormRepository;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,11 +22,11 @@ public class FormService {
         repository.save(form);
     }
 
-    public Optional<Form> findOneById(String id) {
+    public Optional<Form> findOneById(@NonNull String id) {
         return repository.findOneById(id);
     }
 
-    public List<Form> findByUsername(String username) {
+    public List<Form> findByUsername(@NonNull String username) {
         return repository.findByUsername(username);
     }
 }

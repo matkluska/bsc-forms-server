@@ -1,4 +1,4 @@
-package io.kluska.bsc.forms.form.service.infrastructure;
+package io.kluska.bsc.forms.reply.stats.service.infrastructure;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

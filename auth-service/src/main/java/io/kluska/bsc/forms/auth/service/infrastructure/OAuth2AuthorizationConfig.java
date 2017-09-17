@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -27,12 +28,19 @@ public class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
 
     private final MongoUserDetailsService userDetailsService;
 
+    private final Environment env;
+
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
                 .withClient("browser")
                 .authorizedGrantTypes("refresh_token", "password")
-                .scopes("ui");
+                .scopes("ui")
+                .and()
+                .withClient("reply-stats-service")
+                .secret(env.getProperty("REPLY_STATS_SERVICE_PASS"))
+                .authorizedGrantTypes("client_credentials", "refresh_token")
+                .scopes("server");
     }
 
     @Override

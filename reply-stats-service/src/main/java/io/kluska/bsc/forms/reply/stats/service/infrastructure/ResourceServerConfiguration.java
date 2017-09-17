@@ -1,4 +1,4 @@
-package io.kluska.bsc.forms.form.service.infrastructure;
+package io.kluska.bsc.forms.reply.stats.service.infrastructure;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -19,7 +19,9 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
     public void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
-                .authorizeRequests().anyRequest().authenticated();
+                .authorizeRequests()
+                .antMatchers("/replies/**").permitAll()
+                .anyRequest().authenticated();
     }
 
     @Override

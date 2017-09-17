@@ -17,6 +17,7 @@ services:
       MONGODB_APPLICATION_USER: mongo
       MONGODB_APPLICATION_PASS: pass
       MONGODB_APPLICATION_DATABASE: bsc-forms
+      REPLY_STATS_SERVICE_PASS: reply
     ports:
       - 8083:8080
 
@@ -37,7 +38,6 @@ services:
       MONGODB_APPLICATION_DATABASE: bsc-forms
     ports:
       - 8084:8080
-      - 8787:8787
 
   form-mongodb:
     build: mongodb
@@ -54,6 +54,7 @@ services:
       MONGODB_APPLICATION_USER: mongo
       MONGODB_APPLICATION_PASS: pass
       MONGODB_APPLICATION_DATABASE: bsc-forms
+      REPLY_STATS_SERVICE_PASS: reply
     ports:
       - 8085:8080
 
