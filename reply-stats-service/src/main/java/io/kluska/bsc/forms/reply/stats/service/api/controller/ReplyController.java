@@ -40,6 +40,6 @@ public class ReplyController {
                 .map(reply -> replyDTOConverter.apply(reply, formId))
                 .collect(Collectors.toSet());
 
-        replyService.addReplies(replies);
+        replyService.addReplies(replies, formId);
     }
 }
