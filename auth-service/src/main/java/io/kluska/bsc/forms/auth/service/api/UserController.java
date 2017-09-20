@@ -1,10 +1,9 @@
 package io.kluska.bsc.forms.auth.service.api;
 
 import io.kluska.bsc.forms.auth.service.api.dto.UserDTO;
+import io.kluska.bsc.forms.auth.service.api.exception.UserNotFoundException;
 import io.kluska.bsc.forms.auth.service.domain.User;
 import io.kluska.bsc.forms.auth.service.domain.UserService;
-import io.kluska.bsc.forms.exception.handling.error.ClientErrorException;
-import io.kluska.bsc.forms.exception.handling.error.ErrorInfo;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,7 +32,7 @@ public class UserController {
     public UserDTO getUser(@NonNull Principal principal) {
         return userService.findByUsername(principal.getName())
                 .map(UserController::toUserDTO)
-                .orElseThrow(() -> new ClientErrorException(ErrorInfo.USER_NOT_FOUND));
+                .orElseThrow(UserNotFoundException::new);
     }
 
     @PostMapping

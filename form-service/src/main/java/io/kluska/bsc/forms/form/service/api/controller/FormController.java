@@ -1,8 +1,7 @@
 package io.kluska.bsc.forms.form.service.api.controller;
 
-import io.kluska.bsc.forms.exception.handling.error.ClientErrorException;
-import io.kluska.bsc.forms.exception.handling.error.ErrorInfo;
 import io.kluska.bsc.forms.form.api.dto.FormDTO;
+import io.kluska.bsc.forms.form.service.api.exception.FormNotFoundException;
 import io.kluska.bsc.forms.form.service.domain.converter.FormConverter;
 import io.kluska.bsc.forms.form.service.domain.converter.FormDTOConverter;
 import io.kluska.bsc.forms.form.service.domain.model.Form;
@@ -44,7 +43,7 @@ public class FormController {
     public FormDTO findFormById(@PathVariable(name = "id") String id) {
         return formService.findOneById(id)
                 .map(formConverter)
-                .orElseThrow(() -> new ClientErrorException(ErrorInfo.FORM_NOT_FOUND));
+                .orElseThrow(FormNotFoundException::new);
     }
 
     @PostMapping

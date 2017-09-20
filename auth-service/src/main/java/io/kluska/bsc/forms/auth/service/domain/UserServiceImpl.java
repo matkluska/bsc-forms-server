@@ -1,7 +1,6 @@
 package io.kluska.bsc.forms.auth.service.domain;
 
-import io.kluska.bsc.forms.exception.handling.error.ClientErrorException;
-import io.kluska.bsc.forms.exception.handling.error.ErrorInfo;
+import io.kluska.bsc.forms.auth.service.api.exception.UsernameAlreadyInUseException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -36,7 +35,7 @@ public class UserServiceImpl implements UserService {
         Optional<User> existing = repository.findOneByUsername(user.getUsername());
         if (existing.isPresent()) {
             log.error("User: {} already exists", user.getUsername());
-            throw new ClientErrorException(ErrorInfo.USERNAME_ALREADY_IN_USE);
+            throw new UsernameAlreadyInUseException("User: " + user.getUsername() + " already exists");
         }
 
         String hash = encoder.encode(user.getPassword());

@@ -1,6 +1,5 @@
 package io.kluska.bsc.forms.exception.handling.handler;
 
-import io.kluska.bsc.forms.exception.handling.error.ClientErrorException;
 import io.kluska.bsc.forms.exception.handling.error.ErrorInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
@@ -11,6 +10,8 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
@@ -37,18 +38,15 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(fieldMessageMap, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler({ClientErrorException.class})
-    public ResponseEntity<ErrorInfo> handleClientErrorException(ClientErrorException ex) {
-        log.error("Handled ClientErrorException: ", ex);
-        return new ResponseEntity<>(ex.getInfo(), ex.getInfo().getStatus());
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler({Throwable.class})
+    @ResponseBody
+    public ErrorInfo handleOtherException(Exception ex) {
+        return handleException(ex);
     }
 
-    @ExceptionHandler({Exception.class})
-    public ResponseEntity<?> handleOtherException(Exception ex) {
-        log.error("Handled Exception: ", ex);
-        if (ex instanceof ClientErrorException) {
-            return handleClientErrorException((ClientErrorException) ex);
-        }
-        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    protected ErrorInfo handleException(Throwable ex) {
+        log.error(ex.getMessage(), ex);
+        return new ErrorInfo(ex, ex.getMessage());
     }
 }

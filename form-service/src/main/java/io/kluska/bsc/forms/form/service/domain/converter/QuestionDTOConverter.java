@@ -12,7 +12,6 @@ import io.kluska.bsc.forms.form.service.domain.model.questions.LongText;
 import io.kluska.bsc.forms.form.service.domain.model.questions.MultipleChoice;
 import io.kluska.bsc.forms.form.service.domain.model.questions.ShortText;
 import io.kluska.bsc.forms.form.service.domain.model.questions.SingleChoice;
-import io.vavr.API;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -38,11 +37,11 @@ public class QuestionDTOConverter implements Function<QuestionDTO, Question> {
     @Override
     public Question apply(@NonNull QuestionDTO questionDTO) {
         return Match(questionDTO).of(
-                API.Case($(instanceOf(ShortTextDTO.class)), modelMapper.map(questionDTO, ShortText.class)),
-                API.Case($(instanceOf(LongTextDTO.class)), modelMapper.map(questionDTO, LongText.class)),
-                API.Case($(instanceOf(SingleChoiceDTO.class)), modelMapper.map(questionDTO, SingleChoice.class)),
-                API.Case($(instanceOf(MultipleChoiceDTO.class)), modelMapper.map(questionDTO, MultipleChoice.class)),
-                API.Case($(instanceOf(LinearScaleDTO.class)), modelMapper.map(questionDTO, LinearScale.class)),
+                Case($(instanceOf(ShortTextDTO.class)), () -> modelMapper.map(questionDTO, ShortText.class)),
+                Case($(instanceOf(LongTextDTO.class)), () -> modelMapper.map(questionDTO, LongText.class)),
+                Case($(instanceOf(SingleChoiceDTO.class)), () -> modelMapper.map(questionDTO, SingleChoice.class)),
+                Case($(instanceOf(MultipleChoiceDTO.class)), () -> modelMapper.map(questionDTO, MultipleChoice.class)),
+                Case($(instanceOf(LinearScaleDTO.class)), () -> modelMapper.map(questionDTO, LinearScale.class)),
                 Case($(), () -> {
                     throw new RuntimeException("Unsupported question type");
                 }));
