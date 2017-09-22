@@ -21,5 +21,5 @@ public abstract class Reply {
     @NonNull
     private String questionId;
 
-    public abstract boolean validate(QuestionDTO questionDTO);
+    public abstract void validate(QuestionDTO questionDTO);
 }

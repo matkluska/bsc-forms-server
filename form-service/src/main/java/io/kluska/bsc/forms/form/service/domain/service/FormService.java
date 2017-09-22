@@ -29,4 +29,8 @@ public class FormService {
     public List<Form> findByUsername(@NonNull String username) {
         return repository.findByUsername(username);
     }
+
+    public void deleteForm(String id) {
+        repository.delete(id);
+    }
 }

@@ -1,5 +1,6 @@
 package io.kluska.bsc.forms.form.api.dto.question;
 
+import cz.jirutka.validator.collection.constraints.EachNotNull;
 import io.kluska.bsc.forms.form.api.dto.OptionDTO;
 import io.kluska.bsc.forms.form.api.dto.QuestionDTO;
 import lombok.Data;
@@ -20,6 +21,7 @@ import java.util.List;
 public class MultipleChoiceDTO extends QuestionDTO {
     @NonNull
     @NotNull
+    @EachNotNull
     @Valid
     private List<OptionDTO> options;
 }

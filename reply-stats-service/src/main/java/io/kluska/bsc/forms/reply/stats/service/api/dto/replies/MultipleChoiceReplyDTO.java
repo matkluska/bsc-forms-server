@@ -1,5 +1,6 @@
 package io.kluska.bsc.forms.reply.stats.service.api.dto.replies;
 
+import cz.jirutka.validator.collection.constraints.EachNotNull;
 import io.kluska.bsc.forms.reply.stats.service.api.dto.ReplyDTO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -16,5 +17,6 @@ import java.util.List;
 public class MultipleChoiceReplyDTO extends ReplyDTO {
     @NonNull
     @NotNull
+    @EachNotNull
     private List<String> optionIds;
 }

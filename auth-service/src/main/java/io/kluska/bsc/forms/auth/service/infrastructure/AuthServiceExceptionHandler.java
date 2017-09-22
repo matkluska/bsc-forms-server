@@ -1,7 +1,7 @@
 package io.kluska.bsc.forms.auth.service.infrastructure;
 
 import io.kluska.bsc.forms.auth.service.api.exception.UserNotFoundException;
-import io.kluska.bsc.forms.auth.service.api.exception.UsernameAlreadyInUseException;
+import io.kluska.bsc.forms.auth.service.api.exception.UsernameAlreadyUsedException;
 import io.kluska.bsc.forms.exception.handling.error.ErrorInfo;
 import io.kluska.bsc.forms.exception.handling.handler.RestExceptionHandler;
 import org.springframework.http.HttpStatus;
@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ControllerAdvice
 public class AuthServiceExceptionHandler extends RestExceptionHandler {
     @ResponseStatus(HttpStatus.CONFLICT)
-    @ExceptionHandler(value = UsernameAlreadyInUseException.class)
+    @ExceptionHandler(value = UsernameAlreadyUsedException.class)
     @ResponseBody
-    protected ErrorInfo handleUsernameAlreadyInUseException(UsernameAlreadyInUseException ex) {
+    protected ErrorInfo handleUsernameAlreadyInUseException(UsernameAlreadyUsedException ex) {
         return handleException(ex);
     }
 

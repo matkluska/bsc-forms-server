@@ -9,6 +9,7 @@ import io.kluska.bsc.forms.form.service.domain.service.FormService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -50,5 +51,10 @@ public class FormController {
     public void addForm(@RequestBody @Valid FormDTO formDTO, @NonNull Principal principal) {
         Form form = formDTOConverter.apply(formDTO, principal.getName());
         formService.addForm(form);
+    }
+
+    @DeleteMapping(path = "/{id}")
+    public void deleteForm(@PathVariable(name = "id") String id) {
+        formService.deleteForm(id);
     }
 }
