@@ -1,5 +1,6 @@
 package io.kluska.bsc.forms.auth.service.infrastructure;
 
+import io.kluska.bsc.forms.auth.service.api.exception.EmailAlreadyUsedException;
 import io.kluska.bsc.forms.auth.service.api.exception.UserNotFoundException;
 import io.kluska.bsc.forms.auth.service.api.exception.UsernameAlreadyUsedException;
 import io.kluska.bsc.forms.exception.handling.error.ErrorInfo;
@@ -19,6 +20,13 @@ public class AuthServiceExceptionHandler extends RestExceptionHandler {
     @ExceptionHandler(value = UsernameAlreadyUsedException.class)
     @ResponseBody
     protected ErrorInfo handleUsernameAlreadyInUseException(UsernameAlreadyUsedException ex) {
+        return handleException(ex);
+    }
+
+    @ResponseStatus(HttpStatus.CONFLICT)
+    @ExceptionHandler(value = EmailAlreadyUsedException.class)
+    @ResponseBody
+    protected ErrorInfo handleEmailAlreadyUsedException(EmailAlreadyUsedException ex) {
         return handleException(ex);
     }
 
