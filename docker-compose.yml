@@ -1,100 +1,107 @@
-version: "2.1"
+version: '3.2'
+
 services:
-  config-service:
-    image: mkluska/forms-config-service
+  auth-mongodb:
+    image: mkluska/forms-mongo
+    build: mongodb
+    deploy:
+      replicas: 1
     restart: always
-    logging:
-      options:
-        max-size: "10m"
-        max-file: "10"
-
-  discovery-service:
-    image: mkluska/forms-discovery-service
-    restart: always
-    depends_on:
-      config-service:
-        condition: service_healthy
-    ports:
-      - 8082:8080
-    logging:
-      options:
-        max-size: "10m"
-        max-file: "10"
-
-  gateway:
-    image: mkluska/forms-gateway
-    restart: always
-    depends_on:
-      config-service:
-        condition: service_healthy
-      discovery-service:
-        condition: service_healthy
-    ports:
-      - 8080:8080
-    logging:
-      options:
-        max-size: "10m"
-        max-file: "10"
+    environment:
+      MONGODB_APPLICATION_DATABASE: $MONGODB_APPLICATION_DATABASE
+      MONGODB_APPLICATION_PASS: $MONGODB_APPLICATION_PASS
+      MONGODB_APPLICATION_USER: $MONGODB_APPLICATION_USER
 
   auth-service:
     image: mkluska/forms-auth-service
+    build: auth-service
+    deploy:
+      replicas: 1
+      restart_policy:
+        delay: 10s
     restart: always
-    depends_on:
-      config-service:
-        condition: service_healthy
-      discovery-service:
-        condition: service_healthy
-    logging:
-      options:
-        max-size: "10m"
-        max-file: "10"
+    environment:
+      MONGODB_APPLICATION_DATABASE: $MONGODB_APPLICATION_DATABASE
+      MONGODB_APPLICATION_PASS: $MONGODB_APPLICATION_PASS
+      MONGODB_APPLICATION_USER: $MONGODB_APPLICATION_USER
+      REPLY_STATS_SERVICE_PASS: $REPLY_STATS_SERVICE_PASS
 
-  auth-mongodb:
-    image: mkluska/forms-mongo
+  config-service:
+    image: mkluska/forms-config-service
+    build: config-service
+    deploy:
+      replicas: 1
+      restart_policy:
+        delay: 10s
     restart: always
-    logging:
-      options:
-        max-size: "10m"
-        max-file: "10"
 
-  form-service:
-    image: mkluska/forms-form-service
+  discovery-service:
+    image: mkluska/forms-discovery-service
+    build: discovery-service
+    deploy:
+      replicas: 1
+      restart_policy:
+        delay: 10s
     restart: always
-    depends_on:
-      config-service:
-        condition: service_healthy
-      discovery-service:
-        condition: service_healthy
-    logging:
-      options:
-        max-size: "10m"
-        max-file: "10"
+    ports:
+      - 8082:8080
 
   form-mongodb:
     image: mkluska/forms-mongo
+    build: mongodb
+    deploy:
+      replicas: 1
     restart: always
-    logging:
-      options:
-        max-size: "10m"
-        max-file: "10"
+    environment:
+      MONGODB_APPLICATION_DATABASE: $MONGODB_APPLICATION_DATABASE
+      MONGODB_APPLICATION_PASS: $MONGODB_APPLICATION_PASS
+      MONGODB_APPLICATION_USER: $MONGODB_APPLICATION_USER
 
-  reply-stats-service:
-    image: mkluska/forms-reply-stats-service
+  form-service:
+    image: mkluska/forms-form-service
+    build: form-service
+    deploy:
+      replicas: 1
+      restart_policy:
+        delay: 10s
     restart: always
-    depends_on:
-      config-service:
-        condition: service_healthy
-      discovery-service:
-        condition: service_healthy
-    logging:
-      options:
-        max-size: "10m"
-        max-file: "10"
+    environment:
+      MONGODB_APPLICATION_DATABASE: $MONGODB_APPLICATION_DATABASE
+      MONGODB_APPLICATION_PASS: $MONGODB_APPLICATION_PASS
+      MONGODB_APPLICATION_USER: $MONGODB_APPLICATION_USER
+
+  gateway:
+    image: mkluska/forms-gateway
+    build: gateway
+    deploy:
+      replicas: 1
+      restart_policy:
+        delay: 10s
+    restart: always
+    ports:
+      - 8080:8080
 
   reply-mongodb:
     image: mkluska/forms-mongo
+    build: mongodb
+    deploy:
+      replicas: 1
     restart: always
-    logging:
-      options:
-        max-size: "10m"
-        max-file: "10"
+    environment:
+      MONGODB_APPLICATION_DATABASE: $MONGODB_APPLICATION_DATABASE
+      MONGODB_APPLICATION_PASS: $MONGODB_APPLICATION_PASS
+      MONGODB_APPLICATION_USER: $MONGODB_APPLICATION_USER
+
+  reply-stats-service:
+    image: mkluska/forms-reply-stats-service
+    build: reply-stats-service
+    deploy:
+      replicas: 1
+      restart_policy:
+        delay: 10s
+    restart: always
+    environment:
+      MONGODB_APPLICATION_DATABASE: $MONGODB_APPLICATION_DATABASE
+      MONGODB_APPLICATION_PASS: $MONGODB_APPLICATION_PASS
+      MONGODB_APPLICATION_USER: $MONGODB_APPLICATION_USER
+      REPLY_STATS_SERVICE_PASS: $REPLY_STATS_SERVICE_PASS
