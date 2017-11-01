@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,6 +21,7 @@ public class FormService {
     private final FormRepository repository;
 
     public void addForm(Form form) {
+        form.setCreationTime(LocalDateTime.now(ZoneOffset.UTC));
         repository.save(form);
     }
 

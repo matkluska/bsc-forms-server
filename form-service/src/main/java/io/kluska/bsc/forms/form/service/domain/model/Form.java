@@ -5,6 +5,7 @@ import lombok.NonNull;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -20,6 +21,7 @@ public class Form {
     @NonNull
     private String title;
     private String desc;
+    private LocalDateTime creationTime;
     @NonNull
     private List<Question> questions;
 }

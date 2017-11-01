@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.ZoneOffset;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -25,6 +26,8 @@ public class FormConverter implements Function<Form, FormDTO> {
                         .collect(Collectors.toList()));
         formDTO.setId(form.getId());
         formDTO.setDesc(form.getDesc());
+        if (form.getCreationTime() != null)
+            formDTO.setCreationTime(form.getCreationTime().toInstant(ZoneOffset.UTC).toEpochMilli());
 
         return formDTO;
     }
