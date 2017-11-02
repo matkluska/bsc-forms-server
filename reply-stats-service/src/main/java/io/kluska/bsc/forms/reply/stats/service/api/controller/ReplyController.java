@@ -1,14 +1,12 @@
 package io.kluska.bsc.forms.reply.stats.service.api.controller;
 
-import io.kluska.bsc.forms.form.api.dto.FormDTO;
-import io.kluska.bsc.forms.reply.stats.service.api.client.FormClient;
 import io.kluska.bsc.forms.reply.stats.service.api.dto.ReplyDTO;
 import io.kluska.bsc.forms.reply.stats.service.domain.converter.ReplyDTOConverter;
 import io.kluska.bsc.forms.reply.stats.service.domain.model.Reply;
 import io.kluska.bsc.forms.reply.stats.service.domain.service.ReplyService;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,14 +23,10 @@ import java.util.stream.Collectors;
 @RequestMapping(path = "/replies")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ReplyController {
-    private final FormClient formClient;
+    @NonNull
     private final ReplyService replyService;
+    @NonNull
     private final ReplyDTOConverter replyDTOConverter;
-
-    @GetMapping(path = "/{id}")
-    public FormDTO getForm(@PathVariable String id) {
-        return formClient.findFormById(id);
-    }
 
     @PostMapping(path = "/{formId}")
     public void saveReply(@PathVariable String formId, @RequestBody Set<ReplyDTO> replyDtoSet) {

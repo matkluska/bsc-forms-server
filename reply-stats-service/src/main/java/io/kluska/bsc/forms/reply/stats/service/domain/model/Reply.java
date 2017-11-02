@@ -10,10 +10,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 /**
  * @author Mateusz Kluska
  */
-@Document(collection = "replies")
+@Document(collection = Reply.REPLIES_COLLECTION)
 @Data
 @NoArgsConstructor
 public abstract class Reply {
+    public static final String REPLIES_COLLECTION = "replies";
+
     @Id
     private String id;
     @NonNull
