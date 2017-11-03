@@ -4,7 +4,7 @@ import io.kluska.bsc.forms.reply.stats.service.domain.model.QuestionStats;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.util.List;
+import java.util.Map;
 
 /**
  * @author Mateusz Kluska
@@ -12,6 +12,5 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class ShortTextStats extends QuestionStats {
-    private List<String> replies;
-
+    private Map<String, Long> repliesToCount;
 }

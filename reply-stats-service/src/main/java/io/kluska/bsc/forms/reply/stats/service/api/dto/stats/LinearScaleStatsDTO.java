@@ -13,5 +13,5 @@ import java.util.Map;
 @EqualsAndHashCode(callSuper = false)
 public class LinearScaleStatsDTO extends QuestionStatsDTO {
     private float avgValue;
-    private Map<Integer, Long> optionToRepliesCounts;
+    private Map<String, Long> optionToRepliesCounts;
 }
