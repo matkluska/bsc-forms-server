@@ -2,7 +2,7 @@ package io.kluska.bsc.forms.reply.stats.service.api.controller;
 
 import io.kluska.bsc.forms.reply.stats.service.api.dto.FormStatsDTO;
 import io.kluska.bsc.forms.reply.stats.service.domain.converter.FormStatsConverter;
-import io.kluska.bsc.forms.reply.stats.service.domain.service.StatsService;
+import io.kluska.bsc.forms.reply.stats.service.domain.service.FormStatsCalculationService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +19,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class StatsController {
     @NonNull
-    private final StatsService statsService;
+    private final FormStatsCalculationService formStatsCalculationService;
     @NonNull
     private final FormStatsConverter formStatsConverter;
 
     @GetMapping(path = "/{id}")
     public FormStatsDTO getFormStats(@PathVariable String id) {
-        return formStatsConverter.apply(statsService.getFormStats(id));
+        return formStatsConverter.apply(formStatsCalculationService.calcFormStats(id));
     }
 }
