@@ -45,6 +45,7 @@ public class FormStatsCalculationService {
     private final FormStatsRepository formStatsRepository;
 
     @Async
+    @SuppressWarnings("WeakerAccess")
     public void calcAndSaveFormStats(@NonNull final String formId, @NonNull final FormDTO formDTO) {
         List<QuestionStats> questionStats = formDTO.getQuestions().stream()
                 .map(q -> getQuestionStats(q, formId))
