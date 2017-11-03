@@ -7,7 +7,6 @@ import io.kluska.bsc.forms.form.api.dto.question.LongTextDTO;
 import io.kluska.bsc.forms.form.api.dto.question.MultipleChoiceDTO;
 import io.kluska.bsc.forms.form.api.dto.question.ShortTextDTO;
 import io.kluska.bsc.forms.form.api.dto.question.SingleChoiceDTO;
-import io.kluska.bsc.forms.reply.stats.service.api.client.FormClient;
 import io.kluska.bsc.forms.reply.stats.service.domain.model.FormStats;
 import io.kluska.bsc.forms.reply.stats.service.domain.model.QuestionStats;
 import io.kluska.bsc.forms.reply.stats.service.domain.model.stats.LinearScaleStats;
@@ -16,10 +15,12 @@ import io.kluska.bsc.forms.reply.stats.service.domain.model.stats.MultipleChoice
 import io.kluska.bsc.forms.reply.stats.service.domain.model.stats.ShortTextStats;
 import io.kluska.bsc.forms.reply.stats.service.domain.model.stats.SingleChoiceStats;
 import io.kluska.bsc.forms.reply.stats.service.domain.repository.FormStatsFactorsRepository;
+import io.kluska.bsc.forms.reply.stats.service.domain.repository.FormStatsRepository;
 import io.kluska.bsc.forms.reply.stats.service.domain.repository.results.OptionStats;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -41,16 +42,20 @@ public class FormStatsCalculationService {
     @NonNull
     private final FormStatsFactorsRepository statsFactorsRepository;
     @NonNull
-    private final FormClient formClient;
+    private final FormStatsRepository formStatsRepository;
 
-    public FormStats calcFormStats(@NonNull final String formId) {
-        FormDTO formDTO = formClient.findFormById(formId);
+    @Async
+    public void calcAndSaveFormStats(@NonNull final String formId, @NonNull final FormDTO formDTO) {
         List<QuestionStats> questionStats = formDTO.getQuestions().stream()
                 .map(q -> getQuestionStats(q, formId))
                 .collect(Collectors.toList());
-        return FormStats.builder()
+
+        FormStats formStats = FormStats.builder()
+                .formId(formId)
                 .questionStats(questionStats)
                 .build();
+
+        formStatsRepository.save(formStats);
     }
 
     private QuestionStats getQuestionStats(QuestionDTO questionDTO, String formId) {

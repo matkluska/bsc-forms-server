@@ -28,12 +28,16 @@ public class ReplyService {
     @NonNull
     private final ReplyRepository repository;
     @NonNull
+    private final FormStatsCalculationService statsCalculationService;
+    @NonNull
     private final FormClient formClient;
 
     public void addReplies(Set<Reply> replies, String formId) {
         FormDTO formDTO = formClient.findFormById(formId);
         validateReplies(replies, formDTO);
         repository.save(replies);
+
+        statsCalculationService.calcAndSaveFormStats(formId, formDTO);
     }
 
     private static void validateReplies(Set<Reply> replies, FormDTO formDTO) {

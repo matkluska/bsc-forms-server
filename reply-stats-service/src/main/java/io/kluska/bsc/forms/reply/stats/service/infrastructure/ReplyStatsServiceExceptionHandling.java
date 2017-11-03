@@ -3,6 +3,7 @@ package io.kluska.bsc.forms.reply.stats.service.infrastructure;
 import io.kluska.bsc.forms.exception.handling.error.ErrorInfo;
 import io.kluska.bsc.forms.exception.handling.handler.RestExceptionHandler;
 import io.kluska.bsc.forms.reply.stats.service.api.exception.BadReplyTypeException;
+import io.kluska.bsc.forms.reply.stats.service.api.exception.FormStatsNotFoundException;
 import io.kluska.bsc.forms.reply.stats.service.api.exception.InconsistentFormIdsException;
 import io.kluska.bsc.forms.reply.stats.service.api.exception.LackOfRequiredReplyException;
 import io.kluska.bsc.forms.reply.stats.service.api.exception.NotDefinedQuestionException;
@@ -43,6 +44,13 @@ public class ReplyStatsServiceExceptionHandling extends RestExceptionHandler {
     @ExceptionHandler(value = NotDefinedQuestionException.class)
     @ResponseBody
     protected ErrorInfo handleNotDefinedQuestionException(NotDefinedQuestionException ex) {
+        return handleException(ex);
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(value = FormStatsNotFoundException.class)
+    @ResponseBody
+    protected ErrorInfo handleFormStatsNotFoundException(FormStatsNotFoundException ex) {
         return handleException(ex);
     }
 }
