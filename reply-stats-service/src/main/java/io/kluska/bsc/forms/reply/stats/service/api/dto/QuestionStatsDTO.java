@@ -31,5 +31,6 @@ import lombok.NoArgsConstructor;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public abstract class QuestionStatsDTO {
+    private String questionId;
     private long repliesCount;
 }

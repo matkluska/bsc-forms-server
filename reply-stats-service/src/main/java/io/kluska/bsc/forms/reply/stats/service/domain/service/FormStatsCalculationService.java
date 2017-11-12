@@ -77,6 +77,7 @@ public class FormStatsCalculationService {
         long repliesCount = statsFactorsRepository.getRepliesCount(formId, shortTextDTO.getId());
         Map<String, Long> optionToCount = statsFactorsRepository.getOptionToRepliesCountMap(shortTextDTO.getId(), formId);
 
+        shortTextStats.setQuestionId(shortTextDTO.getId());
         shortTextStats.setRepliesCount(repliesCount);
         shortTextStats.setRepliesToCount(optionToCount);
 
@@ -89,6 +90,7 @@ public class FormStatsCalculationService {
         long repliesCount = statsFactorsRepository.getRepliesCount(formId, longTextDTO.getId());
         Map<String, Long> optionToCount = statsFactorsRepository.getOptionToRepliesCountMap(longTextDTO.getId(), formId);
 
+        longTextStats.setQuestionId(longTextDTO.getId());
         longTextStats.setRepliesCount(repliesCount);
         longTextStats.setRepliesToCount(optionToCount);
         return longTextStats;
@@ -100,6 +102,7 @@ public class FormStatsCalculationService {
         Map<String, Long> optionIdToCount = statsFactorsRepository.getOptionIdToRepliesCountMap(singleChoiceDTO, formId);
         long repliesCount = statsFactorsRepository.getRepliesCount(formId, singleChoiceDTO.getId());
 
+        singleChoiceStats.setQuestionId(singleChoiceDTO.getId());
         singleChoiceStats.setRepliesCount(repliesCount);
         singleChoiceStats.setOptionIdToRepliesCounts(optionIdToCount);
         return singleChoiceStats;
@@ -111,6 +114,7 @@ public class FormStatsCalculationService {
         Optional<OptionStats> optionsStats = statsFactorsRepository.getOptionsStats(formId, linearScaleDTO);
         Map<String, Long> optionToCount = statsFactorsRepository.getOptionToRepliesCountMap(linearScaleDTO.getId(), formId);
 
+        linearScaleStats.setQuestionId(linearScaleDTO.getId());
         linearScaleStats.setRepliesCount(optionsStats
                 .map(OptionStats::getCount)
                 .orElse(0L));
@@ -127,6 +131,7 @@ public class FormStatsCalculationService {
         long repliesCount = statsFactorsRepository.getRepliesCount(formId, multipleChoiceDTO.getId());
         Map<String, Long> optionIdToCount = statsFactorsRepository.getOptionIdToRepliesCountMap(multipleChoiceDTO, formId);
 
+        multipleChoiceStats.setQuestionId(multipleChoiceDTO.getId());
         multipleChoiceStats.setRepliesCount(repliesCount);
         multipleChoiceStats.setOptionIdToRepliesCounts(optionIdToCount);
         return multipleChoiceStats;
