@@ -1,6 +1,6 @@
 package io.kluska.bsc.forms.auth.service.infrastructure;
 
-import io.kluska.bsc.forms.auth.service.domain.MongoUserDetailsService;
+import io.kluska.bsc.forms.auth.service.domain.service.MongoUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Bean;

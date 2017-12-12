@@ -1,5 +1,6 @@
-package io.kluska.bsc.forms.auth.service.domain;
+package io.kluska.bsc.forms.auth.service.domain.repository;
 
+import io.kluska.bsc.forms.auth.service.domain.model.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

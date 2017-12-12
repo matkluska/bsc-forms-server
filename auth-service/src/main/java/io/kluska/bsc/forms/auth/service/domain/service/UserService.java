@@ -1,7 +1,9 @@
-package io.kluska.bsc.forms.auth.service.domain;
+package io.kluska.bsc.forms.auth.service.domain.service;
 
 import io.kluska.bsc.forms.auth.service.api.exception.EmailAlreadyUsedException;
 import io.kluska.bsc.forms.auth.service.api.exception.UsernameAlreadyUsedException;
+import io.kluska.bsc.forms.auth.service.domain.model.User;
+import io.kluska.bsc.forms.auth.service.domain.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

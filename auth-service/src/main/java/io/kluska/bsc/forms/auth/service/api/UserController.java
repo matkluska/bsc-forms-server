@@ -2,8 +2,8 @@ package io.kluska.bsc.forms.auth.service.api;
 
 import io.kluska.bsc.forms.auth.service.api.dto.UserDTO;
 import io.kluska.bsc.forms.auth.service.api.exception.UserNotFoundException;
-import io.kluska.bsc.forms.auth.service.domain.User;
-import io.kluska.bsc.forms.auth.service.domain.UserService;
+import io.kluska.bsc.forms.auth.service.domain.model.User;
+import io.kluska.bsc.forms.auth.service.domain.service.UserService;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

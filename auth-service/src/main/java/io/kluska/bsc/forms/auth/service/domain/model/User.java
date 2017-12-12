@@ -1,4 +1,4 @@
-package io.kluska.bsc.forms.auth.service.domain;
+package io.kluska.bsc.forms.auth.service.domain.model;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
