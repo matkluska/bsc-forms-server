@@ -1,4 +1,4 @@
-package io.kluska.bsc.forms.auth.service.api;
+package io.kluska.bsc.forms.auth.service.api.controller;
 
 import io.kluska.bsc.forms.auth.service.api.dto.UserDTO;
 import io.kluska.bsc.forms.auth.service.api.exception.UserNotFoundException;
