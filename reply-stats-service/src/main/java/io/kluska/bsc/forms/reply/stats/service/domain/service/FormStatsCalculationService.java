@@ -45,7 +45,7 @@ public class FormStatsCalculationService {
     private final FormStatsRepository formStatsRepository;
 
     @Async
-    void calcAndSaveFormStats(@NonNull final String formId, @NonNull final FormDTO formDTO) {
+    public void calcAndSaveFormStats(@NonNull final String formId, @NonNull final FormDTO formDTO) {
         List<QuestionStats> questionStats = formDTO.getQuestions().stream()
                 .map(q -> getQuestionStats(q, formId))
                 .collect(Collectors.toList());
